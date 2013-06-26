@@ -1,0 +1,20 @@
+<!doctype html>
+<html ng-app>
+<head>
+	<title>Tour de France</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="./js/tdf.js"></script>
+</head>
+<body>
+
+	<h2>Tour de France</h2>
+	<div ng-controller="tdf">
+		<ul>
+			<li ng-repeat="item in news">
+				{{item.published_at}} - {{item.title}} {{item.comment}}
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>
