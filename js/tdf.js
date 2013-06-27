@@ -1,10 +1,16 @@
-function tdf($scope, $http)
+function tdf($scope, $http, $filter)
 {
 	$scope.news = [];
 
-	$scope.addTodo = function()
+	var newsItems = [];
+
+	$scope.addItem = function(item)
 	{
-		$scope.todos.push( {text: $scope.todoText });
+		if(!newsItems[item.id])
+		{
+			newsItems[item.id] = { published_at: new Date(Date.parse(item.published_at)), title: item.title, comment: item.comment };
+			$scope.news.push(newsItems[item.id]);
+		}
 	};
 
 	var poll = function()
@@ -15,12 +21,11 @@ function tdf($scope, $http)
 			{
 				angular.forEach(data.report, function(item)
 				{
-					this.push({published_at: item.published_at, title: item.title, comment: item.comment});
-
+					$scope.addItem(item);
 				}, $scope.news);
 			});
 	};
 
-	setInterval(poll, 5000);
+	//setInterval(poll, 5000);
 	poll();
 }
