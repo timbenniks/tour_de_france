@@ -1,0 +1,158 @@
+body,p,h1,h2,h3,ul,li,dl
+{
+  margin:0;
+  padding:0;
+}
+
+body
+{
+  width:auto;
+  max-width:700px;
+  font-family:'Pathway Gothic One',sans-serif;
+  font-size:25px;
+  line-height:1.5;
+  margin:0 auto;
+}
+
+iframe
+{
+  display:block;
+  margin:1em 0 0;
+}
+
+ul
+{
+  list-style:none;
+}
+
+li
+{
+  clear:both;
+  margin:0 0 2em;
+}
+
+h1
+{
+  line-height:1;
+  text-transform:uppercase;
+  margin:20px 0;
+}
+
+h2
+{
+  font-size:25px;
+  line-height:1;
+  text-transform:uppercase;
+}
+
+p
+{
+  font-size:16px;
+}
+
+#logo
+{
+  position:absolute;
+  left:20px;
+  top:20px;
+}
+
+strong
+{
+  font-weight:700;
+  text-transform:uppercase;
+  display:block;
+  float:left;
+  line-height:1;
+  font-size:16px;
+}
+
+blockquote
+{
+  background:#f3f3f3;
+  font-size:16px;
+  display:inline-block;
+  padding:12px;
+}
+
+.content
+{
+  margin:0 0 0 100px;
+}
+
+dl
+{
+  text-transform:uppercase;
+  font-size:18px;
+  float:left;
+  width:160px;
+  line-height:2;
+}
+
+dd
+{
+  float:left;
+  width:120px;
+  margin:0;
+}
+
+.stage-info
+{
+  overflow:hidden;
+  margin:0 0 40px;
+}
+
+.stage-img
+{
+  float:left;
+  border:1px solid #ddd;
+  width:98%;
+  height:auto;
+  max-width:444px;
+  margin:0 0 0 40px;
+}
+
+@mediamax-width800px {
+  body
+  {
+    padding:0 1em;
+  }
+  
+  h1
+  {
+    font-size:30px;
+  }
+  
+  dl
+  {
+    font-size:14px;
+    line-height:1.5;
+  }
+  
+  .stage-img
+  {
+    float:none;
+    margin:20px 0;
+  }
+  
+  strong
+  {
+    float:none;
+  }
+  
+  .content
+  {
+    margin:0;
+  }
+  
+  #logo
+  {
+    display:none;
+  }
+  
+  iframe
+  {
+    width:100%;
+    height:auto;
+  }
+}
