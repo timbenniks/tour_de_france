@@ -1,21 +1,176 @@
 <!doctype html>
-<html ng-app>
+<html>
 <head>
 	<title>Tour de France</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-	<script src="./js/tdf.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Pathway+Gothic+One' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=1,minimum-scale=1,maximum-scale=1" />
+
+	<style>
+		body, p, h1, h2, h3, ul, li {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: auto;
+			max-width: 700px;
+			margin: 0 auto;
+			font-family: 'Pathway Gothic One', sans-serif;
+			font-size: 25px;
+			line-height: 1.5;
+		}
+
+		iframe {
+			display: block;
+			margin: 1em 0 0 0;
+		}
+
+		ul {
+			list-style: none;
+		}
+
+		li {
+			margin: 0 0 2em 0;
+			clear: both;
+		}
+
+		h1 {
+			margin: 0 0 1em 0;
+		}
+
+		h2 {
+			font-size: 25px;
+			line-height: 1;
+			text-transform: uppercase;
+		}
+
+		p {
+			font-size: 16px;
+		}
+
+		#logo {
+			position: absolute;
+			left: 20px;
+			top: 20px;
+			opacity: .2;
+		}
+
+		strong {
+			font-weight: bold;
+			text-transform: uppercase;
+			display: block;
+			float: left;
+			line-height: 1;
+			font-size: 16px;
+
+		}
+
+		blockquote {
+			background: #f3f3f3;
+			font-size: 16px;
+			padding: 12px;
+			display: inline-block
+		}
+
+		.content {
+			margin: 0 0 0 100px;
+		}
+		
+		@media (max-width: 600px) {
+			body {
+				padding: 0 1em;
+			}
+			
+			strong {
+				float: none;
+			}
+			
+			.content {
+				margin: 0;
+			}
+			
+			#logo {
+				display: none;	
+			}
+			
+			iframe {
+				width: 100%;
+				height: auto;
+			}
+		}
+	</style>
 </head>
 <body>
 
-	<h2>Tour de France</h2>
-	<div ng-controller="tdf">
-		<ul>
-			<li ng-repeat="item in news">
-				<span class="title">{{item.published_at| date:'dd-MM-yyyy HH:mm:ss'}}</span>
-				<div ng-bind-html-unsafe="item.comment" class="comment">{{item.title}} {{item.comment}}</div>
-			</li>
-		</ul>
-	</div>
+	<img src="logo.png" id="logo" width="180" />
 
+	<h1>Tour de France</h1>
+	<ul></ul>
+
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script>
+		$(function()
+		{
+			window.items = [];
+
+			if(window.webkitNotifications) window.webkitNotifications.requestPermission();
+
+			var add = function(item)
+			{
+				if(!items[item.id])
+				{
+					items[item.id] = item;
+					render(item);
+					notify(item.title, item.date_created, item.id);
+				}
+			}
+
+			render = function(item)
+			{
+				$('ul').append('<li id="'+ item.id +'"><strong>' +  item.date_created.substr(11, 5) + ' uur</strong><div class="content"><h2>' + item.title + '</h2>' + item.body + '</div></li>');
+			},
+
+			notify = function(title, date, id)
+			{
+				if(!window.webkitNotifications) return;
+				var havePermission = window.webkitNotifications.checkPermission();
+  				
+  				if (havePermission === 0)
+  				{
+					var notification = window.webkitNotifications.createNotification(date.substr(11, 5), title, id);
+
+    				notification.onclick = function ()
+    				{
+						window.open('http://tdf.timbenniks.nl#' + id);
+      					notification.close();
+    				}
+    				
+    				notification.show();
+  					
+  				}			
+			},
+
+			fetch = function()
+			{	
+				$.ajax(
+				{
+					url: 'http://tdf.timbenniks.nl/feed.php',
+					type: 'GET',
+					dataType: 'jsonp'
+				})
+				.done(function(data)
+				{					
+					$.each(data, function()
+					{
+						add(this);	
+					});
+
+					setTimeout(fetch, 5000);
+				});
+			};
+
+			fetch();
+		});
+	</script>
 </body>
 </html>
