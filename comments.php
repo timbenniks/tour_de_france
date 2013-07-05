@@ -2,7 +2,7 @@
 header('Content-type: application/json');
 date_default_timezone_set('France/paris');
 
-$early = date('H') < 8;
+$early = date('H') < 11;
 $late = date('H') > 18;
 $nosId = file_get_contents('http://nos.nl/dossier/515430-tour-de-france-2013/tab/730/live/');
 $callback = $_GET['callback'];
