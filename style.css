@@ -1,51 +1,51 @@
 body,p,h1,h2,h3,ul,li,dl {
-	margin:0;
-	padding:0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-	width:auto;
-	max-width:510px;
-	font-family:'Pathway Gothic One',sans-serif;
-	font-size:25px;
-	line-height:1.5;
-	margin:0 auto;
+	width: auto;
+	max-width: 510px;
+	font-family: 'Pathway Gothic One',sans-serif;
+	font-size: 25px;
+	line-height: 1.5;
+	margin: 0 auto;
 }
 
 iframe {
-	display:block;
-	margin:1em 0 0;
+	display: block;
+	margin: 1em 0 0;
 }
 
 ul {
-	list-style:none;
+	list-style: none;
 }
 
-li {
-	clear:both;
-	margin:0 0 2em;
+.comments li {
+	clear: both;
+	margin: 0 0 2em;
 }
 
 h1 {
-	line-height:1;
-	text-transform:uppercase;
-	margin:20px 0;
+	line-height: 1;
+	text-transform: uppercase;
+	margin: 20px 0;
 }
 
 h2 {
-	font-size:25px;
-	line-height:1;
-	text-transform:uppercase;
+	font-size: 25px;
+	line-height: 1;
+	text-transform: uppercase;
 }
 
 p {
-	font-size:16px;
+	font-size: 16px;
 }
 
 #logo {
-	position:absolute;
-	left:20px;
-	top:20px;
+	position: absolute;
+	left: 20px;
+	top: 20px;
 	opacity: .3;
 }
 
@@ -83,43 +83,43 @@ blockquote:before {
 }
 
 .content {
-	margin:0 0 0 100px;
+	margin: 0 0 0 100px;
 }
 	
 dl {
-	text-transform:uppercase;
-	font-size:18px;
-	float:left;
-	width:160px;
-	line-height:2;
+	text-transform: uppercase;
+	font-size: 18px;
+	float: left;
+	width: 160px;
+	line-height: 2;
 }
 
 dd {
-	float:left;
-	width:110px;
-	margin:0;
+	float: left;
+	width: 110px;
+	margin: 0;
 }
 
 .stage-info {
-	overflow:hidden;
-	margin:0 0 40px;
+	overflow: hidden;
+	margin: 0 0 40px;
 }
 
 .stage-img-wrapper {
 	position: relative;
-	float:left;
-	width:290px;
+	float: right;
+	width: 290px;
 	height: 138px;
-	border:1px solid #ddd;
-	margin:0 0 0 40px;
+	border: 1px solid #ddd;
+	margin: 0 0 0 40px;
 }
 
 .stage-img {
 	position: absolute;
 	top: 0;
-	left:0;
-	width:100%;
-	height:auto;
+	left: 0;
+	width: 100%;
+	height: auto;
 }
 
 .progress {
@@ -132,49 +132,146 @@ dd {
 	max-width: 272px;
 }
 
-.livestream {
-	margin: 20px 0;
+.gaps {
+	margin: 40px 0;
+	overflow: hidden;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 20px 0;
+	
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	-webkit-box-direction: row;
+	-moz-box-direction: row;
+
+	-webkit-box-orient: horizontal;
+	-moz-box-orient: horizontal;
+	box-orient: horizontal;
+
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+
+.gaps li {
+	text-align: center;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	display: block;
+	font-size: 0;
+}
+
+.flag-medium {
+	display: none;
+}
+
+.shirts {
+	display: block;
+	margin: 0 0 5px 0;
+}
+
+.shirt {
+	background: url('shirtsprite.png') no-repeat -500px top;
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	vertical-align: top;
+}
+
+.shirt.bol { background-position: -59px -30px; }
+.shirt.red { display: none; }
+.shirt.white { background-position: -89px -30px; }
+.shirt.green { background-position: -29px -30px; }
+.shirt.yellow { background-position: 0 -30px; }
+
+.group-type {
+    background: url('sprite-positions.png') no-repeat;
+    display: inline-block;
+    height: 35px;
+    vertical-align: top;
+}
+
+.single .group-type {
+    background-position: left top;
+    width: 35px;
+}
+
+.small .group-type {
+    background-position: -304px top;
+    width: 45px;
+}
+
+.big .group-type {
+    background-position: -199px top;
+    width: 50px;
+}
+
+.peloton .group-type {
+    background-position: -90px top;
+    width: 65px;
+}
+
+.finish .group-type {
+    background-position: -379px top;
+    width: 80px;
+    height: 75px;
+}
+
+.time {
+	display: block;
+	font-size: 14px;
 }
 
 @media (max-width: 800px)
 {
 	body {
-		padding:0 13px;
+		padding: 0 13px;
 	}
 	  
 	h1 {
-		font-size:30px;
+		font-size: 30px;
 	}
 	  
 	dl {
-		font-size:14px;
-		line-height:1.5;
+		font-size: 14px;
+		line-height: 1.5;
 		float: none;
 	}
 	  
 	.stage-img-wrapper {
-		float:none;
-		margin:20px 0;
+		float: none;
+		margin: 20px 0;
 	}
 	  
 	strong {
-		float:none;
+		float: none;
 	}
 	  
 	.content {
-		margin:0;
+		margin: 0;
 	}
 
 	#logo {
-		display:none;
+		display: none;
 	}
 	  
 	iframe {
-		width:100%;
-		height:auto;
+		width: 100%;
+		height: auto;
 	}
 	
 	.livestream {
+		display: none;
+	}
+	
+	blockquote:before {
 		display: none;
 	}
 }

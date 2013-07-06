@@ -32,19 +32,8 @@
 	<div class="stage-info"></div>
 	
 	<?php if(!$early && !$late) { ?>
-	
-	<div class="livestream">
-		<object type="application/x-shockwave-flash" name="live-video-stream" id="live-video-stream" data="http://s.nos.nl/liveplayer/v1/nos_osmf.swf?nocache=1372677383259" width="544px" height="306px" style="visibility: visible;"><param name="bgcolor" value="#121018"><param name="scaleMode" value="noScale"><param name="allowFullScreen" value="true"><param name="wmode" value="transparent"><param name="allowScriptAccess" value="always"><param name="flashvars" value="src=http://l2cm6061107a390051d16507000000.91859e9989e9947f.smoote1g.npostreaming.nl/d/live/npo/tvlive/ned1/ned1.isml/ned1.f4m&amp;poster=http://s.nos.nl/img/placeholders/studiosport.jpg&amp;autoPlay=true&amp;verbose=true&amp;streamType=dvr&amp;backgroundColor=0x121018&amp;scaleMode=letterBox&amp;controlBarAutoHide=true&amp;controlBarPosition=bottom&amp;liveOffset=8&amp;enableStageVideo=false&amp;javascriptCallbackFunction=playerJsBridge"></object>
-	</div>
-	
-	<?php } else { ?>
-			
-	<div class="livestream">
-		<img src="http://s.nos.nl/img/placeholder_no_live.png" alt="Er is op dit moment geen uitzending">
-	</div>
-
+	<ul class="gaps"></ul>
 	<?php } ?>
-	
 	<ul class="comments"></ul>
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -148,6 +137,36 @@
 				fetch();
 			};
 			
+			window.liveGaps = function(listTofill)
+			{
+				var fetch = function(initial)
+				{
+					$.ajax(
+					{
+						url: 'http://tdf.timbenniks.nl/gaps.php',
+						type: 'GET',
+						dataType: 'jsonp'
+					})
+					.done(function(data)
+					{
+						listTofill.empty();
+						
+						$.each(data, function()
+						{
+							listTofill.prepend(this.gaphtml);
+						});
+												
+						setTimeout(function(){ fetch(false) }, 30000);
+					});
+				};
+			
+				if(listTofill.length)
+				{
+					fetch(true);
+				}
+			};
+			
+			new liveGaps($('.gaps'));
 			new liveComments($('.comments'));
 			new stageInfo($('.stage-info'));
 		});
